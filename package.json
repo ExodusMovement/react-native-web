@@ -1,32 +1,52 @@
 {
-  "private": true,
-  "version": "0.17.5",
-  "name": "monorepo",
-  "scripts": {
-    "clean": "del-cli ./packages/*/dist",
-    "compile": "npm-run-all clean -p \"compile:* {@}\" --",
-    "compile:commonjs": "cd packages/react-native-web && cross-env BABEL_ENV=commonjs babel --root-mode upward src --out-dir dist/cjs --ignore \"**/__tests__\"",
-    "compile:es": "cd packages/react-native-web && babel --root-mode upward src --out-dir dist --ignore \"**/__tests__\"",
-    "compile:flow": "gen-flow-files packages/react-native-web/src --out-dir packages/react-native-web/dist",
-    "benchmarks": "cd packages/benchmarks && yarn dev",
-    "benchmarks:build": "cd packages/benchmarks && yarn build",
-    "benchmarks:release": "yarn benchmarks:build && git checkout gh-pages && rm -rf ./docs/benchmarks && mv packages/benchmarks/dist ./docs/benchmarks && git add -A && git commit -m \"Deploy benchmarks\" && git push origin gh-pages && git checkout -",
-    "docs": "cd packages/docs && yarn dev",
-    "docs:build": "cd packages/docs && yarn build",
-    "docs:release": "yarn docs:build && git checkout gh-pages && rm -rf ./docs && mv packages/docs/dist ./docs && git add ./docs && git commit -m \"Deploy documentation\" && git push origin gh-pages && git checkout -",
-    "examples": "cd packages/examples && yarn dev",
-    "examples:build": "cd packages/examples && yarn build",
-    "flow": "flow",
-    "fmt": "prettier --write \"**/*.js\"",
-    "fmt:report": "prettier --check \"**/*.js\"",
-    "jest": "jest --config ./scripts/jest/config.js",
-    "lint": "yarn lint:report --fix",
-    "lint:report": "eslint packages scripts",
-    "prerelease": "yarn test && yarn compile",
-    "release": "node ./scripts/release/publish.js",
-    "postrelease": "yarn docs:release && yarn benchmarks:release",
-    "test": "yarn flow && yarn lint:report && yarn jest --runInBand"
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
+  "name": "react-native-web",
+  "version": "0.17.5",
+  "description": "React Native for Web",
+  "module": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "jest",
+    "jest-preset.js",
+    "src",
+    "!**/__tests__"
+  ],
+  "scripts": {
+    "compile:commonjs": "cross-env BABEL_ENV=commonjs babel --root-mode upward src --out-dir dist/cjs --ignore \"**/__tests__\""
+  },
+  "dependencies": {
+    "array-find-index": "^1.0.2",
+    "create-react-class": "^15.7.0",
+    "fbjs": "^3.0.0",
+    "hyphenate-style-name": "^1.0.4",
+    "inline-style-prefixer": "^6.0.0",
+    "normalize-css-color": "^1.0.2",
+    "prop-types": "^15.6.0",
+    "yarn": "^1.22.17"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.1",
+    "react-dom": ">=17.0.1"
+  },
+  "author": "Nicolas Gallagher",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/necolas/react-native-web.git"
+  },
+  "tags": [
+    "react"
+  ],
+  "keywords": [
+    "react",
+    "react-component",
+    "react-native",
+    "web"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
@@ -65,32 +85,5 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-test-renderer": "^17.0.1"
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "packages/react-native-web/src/index.js": [
-      "node ./scripts/babel/createModuleMap.js",
-      "prettier --write ./packages/babel-plugin-react-native-web/src/moduleMap.js",
-      "git add ./packages/babel-plugin-react-native-web/src/moduleMap.js"
-    ],
-    "**/*.js": [
-      "prettier --write",
-      "git update-index --again",
-      "eslint"
-    ]
-  },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "trailingComma": "none"
-  },
-  "author": "Nicolas Gallagher",
-  "license": "MIT"
+  }
 }
