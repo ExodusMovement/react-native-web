@@ -1,22 +1,15 @@
 {
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
-  "name": "react-native-web",
-  "version": "0.17.5",
+  "name": "@exodus/react-native-web",
+  "version": "0.1.0",
   "description": "React Native for Web",
-  "module": "dist/index.js",
   "main": "dist/cjs/index.js",
   "sideEffects": false,
   "files": [
-    "dist",
-    "jest",
-    "jest-preset.js",
-    "src",
-    "!**/__tests__"
+    "dist"
   ],
   "scripts": {
-    "compile:commonjs": "cross-env BABEL_ENV=commonjs babel --root-mode upward src --out-dir dist/cjs --ignore \"**/__tests__\""
+    "compile:commonjs": "cross-env BABEL_ENV=commonjs babel --root-mode upward src --out-dir dist/cjs --ignore \"**/__tests__\"",
+    "test": "jest --runInBand"
   },
   "dependencies": {
     "array-find-index": "^1.0.2",
@@ -63,24 +56,17 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-add-module-exports": "^1.0.4",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "caniuse-api": "^3.0.0",
     "cross-env": "^7.0.3",
-    "del-cli": "^3.0.1",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
-    "eslint-plugin-flowtype": "^5.4.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "flow-bin": "^0.148.0",
-    "gen-flow-files": "^0.4.11",
-    "glob": "^7.1.6",
     "husky": "^4.3.8",
     "inline-style-prefixer": "^6.0.0",
     "jest": "^25.5.0",
     "jest-canvas-mock": "^2.3.1",
     "lint-staged": "^10.5.4",
-    "npm-run-all": "^4.1.3",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
