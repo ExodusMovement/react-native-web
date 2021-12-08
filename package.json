@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "compile:commonjs": "cross-env BABEL_ENV=commonjs babel --root-mode upward src --out-dir dist/cjs --ignore \"**/__tests__\"",
+    "prerelease": "yarn test && yarn compile:commonjs",
     "test": "jest --runInBand"
   },
   "dependencies": {
