@@ -13,14 +13,12 @@
     "test": "jest --runInBand"
   },
   "dependencies": {
-    "array-find-index": "^1.0.2",
     "create-react-class": "^15.7.0",
     "fbjs": "^3.0.0",
     "hyphenate-style-name": "^1.0.4",
     "inline-style-prefixer": "^6.0.0",
     "normalize-css-color": "^1.0.2",
-    "prop-types": "^15.6.0",
-    "yarn": "^1.22.17"
+    "prop-types": "^15.6.0"
   },
   "peerDependencies": {
     "react": ">=17.0.1",
