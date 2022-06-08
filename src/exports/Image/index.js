@@ -129,10 +129,6 @@ function resolveAssetUri(source): ?string {
     }
   }
 
-  if (uri && uri.includes('"')) {
-    throw new Error('Provided uri contains double quote.');
-  }
-
   return uri;
 }
 
@@ -198,6 +194,9 @@ const Image: React.AbstractComponent<ImageProps, React.ElementRef<typeof View>> 
     const selectedSource = shouldDisplaySource ? source : defaultSource;
     const displayImageUri = resolveAssetUri(selectedSource);
     const imageSizeStyle = resolveAssetDimensions(selectedSource);
+    if (displayImageUri && displayImageUri.includes('"')) {
+      throw new Error('Provided uri contains double quote.');
+    }
     const backgroundImage = displayImageUri ? `url("${displayImageUri}")` : null;
     const backgroundSize = getBackgroundSize();
 
