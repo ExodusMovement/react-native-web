@@ -129,6 +129,10 @@ function resolveAssetUri(source): ?string {
     }
   }
 
+  if (uri && uri.includes('"')) {
+    throw new Error('Provided uri contains double quote.');
+  }
+
   return uri;
 }
 
